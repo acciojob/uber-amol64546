@@ -13,6 +13,8 @@ import com.driver.repository.TripBookingRepository;
 import com.driver.model.TripStatus;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -50,6 +52,7 @@ public class CustomerServiceImpl implements CustomerService {
 		// getting nearest driver who's cab is available
 		Driver driver = null;
 		List<Driver> driverList = driverRepository2.findAll();
+
 		for(Driver driver1: driverList){
 			if(driver1.getCab().getAvailable()){
 				driver = driver1;
@@ -96,6 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 		// trip is canceled
 		tripBooking.setStatus(TripStatus.CANCELED);
+		tripBooking.setBill(0);
 		// cab is available now
 		tripBooking.getDriver().getCab().setAvailable(true);
 
